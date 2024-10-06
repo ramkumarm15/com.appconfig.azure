@@ -15,7 +15,7 @@ namespace com.appconfig.azure
 
         public static IConfigurationBuilder AddAzure(this IConfigurationBuilder config, AzureSettings settings)
         {
-            config.AddAzureAppConfiguration(options  =>
+            config.AddAzureAppConfiguration(options =>
             {
                 options.Connect(settings.ConnectionString)
                 .Select("Testing:*", null)
@@ -26,9 +26,7 @@ namespace com.appconfig.azure
                 });
                 options.ConfigureKeyVault(kv =>
                 {
-                    //var credential = ClientSecretCredential().
-                    var cred = new ClientSecretCredential(tenantId: "b845856f-adbb-4e37-9e00-9fed123512ee", clientId: "5da4786e-3f6a-4cb0-b75f-e9da632fd888", clientSecret: "1Tz8Q~IRL72NguBqE4xCnzBx-O9I2GaaPzsDFaDO");
-                    kv.SetCredential(new ManagedIdentityCredential());
+                    kv.SetCredential(new DefaultAzureCredential());
                 });
 
                 configRef = options.GetRefresher();
