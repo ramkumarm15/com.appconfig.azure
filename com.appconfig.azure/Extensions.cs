@@ -15,7 +15,7 @@ namespace com.appconfig.azure
 
         public static IConfigurationBuilder AddAzure(this IConfigurationBuilder config, AzureSettings settings)
         {
-            config.AddAzureAppConfiguration(options =>
+            config.AddAzureAppConfiguration(options  =>
             {
                 options.Connect(settings.ConnectionString)
                 .Select("Testing:*", null)
